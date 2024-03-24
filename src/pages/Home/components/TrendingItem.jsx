@@ -18,7 +18,7 @@ const TrendingItem = ({ article }) => {
       <div className="flex flex-col gap-1">
         <i className="text-xs">
           <Link
-            to={`/categories/${article.source}/${article.category}`}
+            to={`/categories/${article.category}`}
             className="text-blue-500 hover:text-blue-700"
           >
             {article.category}
