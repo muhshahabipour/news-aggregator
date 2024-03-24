@@ -28,7 +28,7 @@ const Article = () => {
             <i className="text-xs">{article.publishAt}</i>
 
             <Link
-              to={`/categories/${article.source}/${article.category}`}
+              to={`/categories/${article.category}`}
               className="text-blue-500 hover:text-blue-700"
             >
               {article.category}
