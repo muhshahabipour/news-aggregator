@@ -24,9 +24,12 @@ CategorySection.propTypes = {
         banner: PropTypes.string,
         publishAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         summary: PropTypes.string,
+        content: PropTypes.string,
         author: PropTypes.string,
         category: PropTypes.string,
         source: PropTypes.string,
+        url: PropTypes.string,
+        keyWords: PropTypes.arrayOf(PropTypes.string),
       })
     ),
   }),
