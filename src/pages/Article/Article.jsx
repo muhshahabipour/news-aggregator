@@ -14,60 +14,67 @@ const article = {
 
 const Article = () => {
   return (
-    <div className="flex items-stretch w-full">
-      <div className="w-full space-y-3">
-        <div className="rounded-lg overflow-hidden h-64 w-full bg-neutral-100 flex justify-center items-center">
-          <img
-            src={article.banner}
-            alt=""
-            className="min-w-0 min-h-0 flex-shrink-0 w-full"
-          />
-        </div>
-        <div className="flex flex-col gap-1 ">
-          <div className="flex justify-between">
-            <i className="text-xs">{article.publishAt}</i>
+    <div className="flex-grow flex flex-col gap-8 px-6">
+      <div className="flex items-stretch w-full">
+        <div className="w-full space-y-3">
+          <div className="rounded-lg overflow-hidden h-64 w-full bg-neutral-100 flex justify-center items-center">
+            <img
+              src={article.banner}
+              alt=""
+              className="min-w-0 min-h-0 flex-shrink-0 w-full"
+            />
+          </div>
+          <div className="flex flex-col gap-1 ">
+            <div className="flex justify-between">
+              <i className="text-xs">{article.publishAt}</i>
+
+              <Link
+                to={`/categories/${article.category}`}
+                className="text-blue-500 hover:text-blue-700"
+              >
+                {article.category}
+              </Link>
+            </div>
+
+            <h1 className="font-bold text-2xl">{article.title}</h1>
+            <p className="text-neutral-500 text-justify">{article.summary}</p>
 
             <Link
-              to={`/categories/${article.category}`}
-              className="text-blue-500 hover:text-blue-700"
+              to={article.url || "https://google.com"}
+              target="_blank"
+              referrerPolicy="no-referrer"
+              className="text-blue-500 hover:text-blue-700 text-sm my-4"
             >
-              {article.category}
+              <i>{article.url || "https://google.com"}</i>
             </Link>
-          </div>
 
-          <h1 className="font-bold text-2xl">{article.title}</h1>
-          <p className="text-neutral-500 text-justify">{article.summary}</p>
+            <hr />
 
-          <Link
-            to={article.url || "https://google.com"}
-            target="_blank"
-            referrerPolicy="no-referrer"
-            className="text-blue-500 hover:text-blue-700 text-sm my-4"
-          >
-            <i>{article.url || "https://google.com"}</i>
-          </Link>
-
-          <hr />
-
-          <div className="text-sm mt-4">
-            <span className="font-semibold">Summary</span>
-            <span className="text-orange-400"> By {article.author || "unknown"}</span>
-          </div>
-
-          <p className="text-justify py-4">{article.content || "Oops!, This content is empty."}</p>
-
-          {/* {article.keyWords && ( */}
-          <div className="space-3 flex flex-wrap gap-4 mt-4 text-xs">
-            {[...(article.keyWords || [])].map((word) => (
-              <span
-                className="bg-neutral-200 rounded px-2 py-1 cursor-auto select-none"
-                key={word}
-              >
-                #{word}
+            <div className="text-sm mt-4">
+              <span className="font-semibold">Summary</span>
+              <span className="text-orange-400">
+                {" "}
+                By {article.author || "unknown"}
               </span>
-            ))}
+            </div>
+
+            <p className="text-justify py-4">
+              {article.content || "Oops!, This content is empty."}
+            </p>
+
+            {/* {article.keyWords && ( */}
+            <div className="space-3 flex flex-wrap gap-4 mt-4 text-xs">
+              {[...(article.keyWords || [])].map((word) => (
+                <span
+                  className="bg-neutral-200 rounded px-2 py-1 cursor-auto select-none"
+                  key={word}
+                >
+                  #{word}
+                </span>
+              ))}
+            </div>
+            {/* )} */}
           </div>
-          {/* )} */}
         </div>
       </div>
     </div>

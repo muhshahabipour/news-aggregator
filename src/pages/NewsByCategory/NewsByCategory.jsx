@@ -128,20 +128,23 @@ const articles = [
   },
 ];
 
-
 const NewsByCategory = () => {
   return (
-    <div className="flex flex-col gap-y-4 xl:flex-row">
-      <div className="flex flex-col xl:basis-3/5 xl:pr-2 gap-y-4">
-        <h1 className="font-bold text-2xl">
-          Last from{" "}
-          <span className="text-orange-400">{category.title || "unknown"}</span>
-        </h1>
+    <div className="flex-grow flex flex-col gap-8 px-6">
+      <div className="flex flex-col gap-y-4 xl:flex-row">
+        <div className="flex flex-col xl:basis-3/5 xl:pr-2 gap-y-4">
+          <h1 className="font-bold text-2xl">
+            Last from{" "}
+            <span className="text-orange-400">
+              {category.title || "unknown"}
+            </span>
+          </h1>
 
-        <div className="flex flex-col gap-4">
-          {[...(articles || [])].map((article) => (
-            <ArticleBrief key={article.id} article={article} />
-          ))}
+          <div className="flex flex-col gap-4">
+            {[...(articles || [])].map((article) => (
+              <ArticleBrief key={article.id} article={article} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
