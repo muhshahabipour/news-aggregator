@@ -8,7 +8,7 @@ const Header = () => {
         <span className="text-sm text-blue-700">By category</span>
       </div>
 
-      <div className="">
+      <div >
         <input
           type="text"
           className={cn(
