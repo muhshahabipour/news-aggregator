@@ -1,22 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const article = {
-  id: "d8f079e8-7c82-4b64-b1ba-69a8e08123a8",
-  banner: "http://placehold.it/64x32",
-  publishedAt: "2015-10-21T11:34:26 -03:00",
-  title: "quis velit nostrud irure laborum aliqua",
-  description:
-    "Duis anim nostrud eiusmod proident et. Ex in nostrud magna excepteur eiusmod magna aliquip consequat laboris excepteur. Cupidatat velit fugiat tempor incididunt amet elit exercitation non. Non enim minim enim amet tempor amet cillum magna velit cillum aute aliqua mollit veniam. Ut nisi elit excepteur cupidatat nostrud.\r\n",
-  author: "Trujillo Oneill",
-  category: "Sport",
-};
-
 const Article = () => {
+  let { state } = useLocation();
+
+  const { article } = state;
+
   return (
     <div className="flex-grow flex flex-col gap-8 px-6">
       <div className="flex items-stretch w-full">
@@ -64,7 +58,7 @@ const Article = () => {
               to={article.url || "https://google.com"}
               target="_blank"
               referrerPolicy="no-referrer"
-              className="text-blue-500 hover:text-blue-700 text-sm my-4"
+              className="text-blue-500 hover:text-blue-700 text-sm my-4 line-clamp-1"
             >
               <i>{article.url || "https://google.com"}</i>
             </Link>

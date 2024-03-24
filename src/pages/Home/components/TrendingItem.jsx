@@ -8,7 +8,8 @@ dayjs.extend(relativeTime);
 const TrendingItem = ({ article }) => {
   return (
     <Link
-      to={`/article/${article.source}/${article.id}`}
+      to={`/article/${encodeURIComponent(article.title)}`}
+      state={{ article }}
       className="flex items-stretch w-full gap-2"
     >
       <div className="rounded-lg flex-shrink-0 overflow-hidden h-16 w-16 bg-neutral-100 flex justify-center items-center">

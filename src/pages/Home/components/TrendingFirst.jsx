@@ -8,7 +8,8 @@ dayjs.extend(relativeTime);
 const TrendingFirst = ({ article }) => {
   return (
     <Link
-      to={`/article/${article.source}/${article.id}`}
+      to={`/article/${encodeURIComponent(article.title)}`}
+      state={{article}}
       className="flex items-stretch w-full"
     >
       <div className="w-full space-y-3">
@@ -30,8 +31,8 @@ const TrendingFirst = ({ article }) => {
                   className="text-blue-500 hover:text-blue-700"
                 >
                   {article.category}
-                </Link>&nbsp;
-                /&nbsp;
+                </Link>
+                &nbsp; /&nbsp;
               </>
             )}
             {dayjs().to(dayjs(article.publishedAt))}

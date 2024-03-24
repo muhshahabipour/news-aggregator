@@ -8,10 +8,8 @@ const Trending = () => {
   const { loading, newsData = [] } = useNewsData(null, undefined, 1, 6);
 
   useEffect(() => {
-    if (!loading) console.log(newsData);
+    if (!loading) console.log(loading);
   }, [newsData, loading]);
-
-  // console.log(error, loading, newsData, totalResults);
 
   return (
     <div>

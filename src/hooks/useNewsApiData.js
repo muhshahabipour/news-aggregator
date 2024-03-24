@@ -17,7 +17,7 @@ const useNewsData = (
         setLoading(true);
 
         const apiKey = import.meta.env.VITE_NEWS_API_KEY;
-        const apiUrl = `${import.meta.env.VITE_NEWS_API_BASE_URL + (!searchTerm ? "/v2/top-headlines" : "/v2/everything")}?apiKey=${apiKey}&country=us`;
+        const apiUrl = `${import.meta.env.VITE_NEWS_API_BASE_URL + (!searchTerm ? `/v2/top-headlines?apiKey=${apiKey}&country=us` : `/v2/everything?apiKey=${apiKey}`)}`;
         const categoryParam = params.category
           ? `&category=${params.category}`
           : ""; // business, entertainment, general, health, science, sports, technology

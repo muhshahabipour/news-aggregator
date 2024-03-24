@@ -14,7 +14,7 @@ const CategorySection = ({ category }) => {
   );
 
   useEffect(() => {
-    if (!loading) console.log(articles);
+    if (!loading) console.log(loading);
   }, [articles, loading]);
 
   return (

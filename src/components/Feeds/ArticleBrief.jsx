@@ -8,7 +8,8 @@ dayjs.extend(relativeTime);
 const ArticleBrief = ({ article }) => {
   return (
     <Link
-      to={`/article/${article.source}/${article.id}`}
+      to={`/article/${encodeURIComponent(article.title)}`}
+      state={{article}}
       className="flex items-stretch w-full gap-2"
     >
       <div className="rounded-lg flex-shrink-0 overflow-hidden h-32 w-32 bg-neutral-100 flex justify-center items-center">
