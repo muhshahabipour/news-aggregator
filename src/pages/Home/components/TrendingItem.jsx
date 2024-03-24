@@ -17,7 +17,10 @@ const TrendingItem = ({ article }) => {
 
       <div className="flex flex-col gap-1">
         <i className="text-xs">
-          <Link to={`/categories/${article.source}/${article.category}`} className="text-blue-500 hover:text-blue-700">
+          <Link
+            to={`/categories/${article.source}/${article.category}`}
+            className="text-blue-500 hover:text-blue-700"
+          >
             {article.category}
           </Link>{" "}
           / {article.publishAt}
@@ -38,9 +41,12 @@ TrendingItem.propTypes = {
     banner: PropTypes.string,
     publishAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     summary: PropTypes.string,
+    content: PropTypes.string,
     author: PropTypes.string,
     category: PropTypes.string,
     source: PropTypes.string,
+    url: PropTypes.string,
+    keyWords: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 
