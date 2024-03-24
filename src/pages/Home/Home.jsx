@@ -1,14 +1,16 @@
-import Footer from "@/components/Layout/Footer";
-import Header from "@/components/Layout/Header";
+import TopCategories from "./components/TopCategories";
+import Trending from "./components/Trending";
 
 const Home = () => {
   return (
-    <div className="h-full flex-grow flex flex-col">
-      <Header />
+    <div className="flex-grow flex flex-col gap-8 px-6">
+      <div>
+        <Trending />
+      </div>
 
-      <div className="flex-grow flex flex-col">Home</div>
-
-      <Footer />
+      <div>
+        <TopCategories />
+      </div>
     </div>
   );
 };
