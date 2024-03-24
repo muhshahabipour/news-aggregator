@@ -25,8 +25,8 @@ const NewsByCategory = () => {
         <div className="flex flex-col xl:basis-3/5 xl:pr-2 gap-y-4">
           <h1 className="font-bold text-2xl">
             Last from{" "}
-            <span className="text-orange-400">
-              {category.title || "unknown"}
+            <span className="text-orange-400 capitalize">
+              {category || "unknown"}
             </span>
           </h1>
 
