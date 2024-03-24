@@ -20,7 +20,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "categories/:source/:category",
+          path: "categories/:category",
           element: <NewsByCategory />,
         },
         {

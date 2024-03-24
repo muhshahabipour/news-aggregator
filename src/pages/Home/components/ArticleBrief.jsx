@@ -17,7 +17,7 @@ const ArticleBrief = ({ article }) => {
           {article.publishAt}
         </i>
         <h4 className="font-bold line-clamp-2">{article.title}</h4>
-        <p className="line-clamp-4 text-neutral-500 text-xs text-justify">
+        <p className="line-clamp-4 text-neutral-500 text-justify">
           {article.summary}
         </p>
       </div>
@@ -32,9 +32,12 @@ ArticleBrief.propTypes = {
     banner: PropTypes.string,
     publishAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     summary: PropTypes.string,
+    content: PropTypes.string,
     author: PropTypes.string,
     category: PropTypes.string,
     source: PropTypes.string,
+    url: PropTypes.string,
+    keyWords: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 
