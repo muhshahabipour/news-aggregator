@@ -1,12 +1,27 @@
-import ArticleBrief from "./ArticleBrief";
+import ArticleBrief from "../../../components/Feeds/ArticleBrief";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+import useNewsData from "@/hooks/useNewsApiData";
 
 const CategorySection = ({ category }) => {
+  const { loading, newsData: articles = [] } = useNewsData(
+    null,
+    {
+      category: category.key,
+    },
+    1,
+    2
+  );
+
+  useEffect(() => {
+    if (!loading) console.log(articles);
+  }, [articles, loading]);
+
   return (
     <div className="w-full">
       <h5 className="font-semibold mb-6">{category.title}</h5>
       <div className="flex flex-col gap-4">
-        {[...(category.articles || [])].slice(0, 2).map((article) => (
+        {[...(articles || [])].slice(0, 2).map((article) => (
           <ArticleBrief key={article.id} article={article} />
         ))}
       </div>
@@ -17,21 +32,7 @@ const CategorySection = ({ category }) => {
 CategorySection.propTypes = {
   category: PropTypes.shape({
     title: PropTypes.string,
-    articles: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        title: PropTypes.string,
-        banner: PropTypes.string,
-        publishAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        summary: PropTypes.string,
-        content: PropTypes.string,
-        author: PropTypes.string,
-        category: PropTypes.string,
-        source: PropTypes.string,
-        url: PropTypes.string,
-        keyWords: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
+    key: PropTypes.string.isRequired,
   }),
 };
 

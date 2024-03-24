@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const article = {
   id: "d8f079e8-7c82-4b64-b1ba-69a8e08123a8",
   banner: "http://placehold.it/64x32",
-  publishAt: "2015-10-21T11:34:26 -03:00",
+  publishedAt: "2015-10-21T11:34:26 -03:00",
   title: "quis velit nostrud irure laborum aliqua",
-  summary:
+  description:
     "Duis anim nostrud eiusmod proident et. Ex in nostrud magna excepteur eiusmod magna aliquip consequat laboris excepteur. Cupidatat velit fugiat tempor incididunt amet elit exercitation non. Non enim minim enim amet tempor amet cillum magna velit cillum aute aliqua mollit veniam. Ut nisi elit excepteur cupidatat nostrud.\r\n",
   author: "Trujillo Oneill",
   category: "Sport",
@@ -21,12 +25,27 @@ const Article = () => {
             <img
               src={article.banner}
               alt=""
-              className="min-w-0 min-h-0 flex-shrink-0 w-full"
+              className="min-w-0 min-h-0 flex-shrink-0 h-[inherit] w-full object-cover"
             />
           </div>
           <div className="flex flex-col gap-1 ">
             <div className="flex justify-between">
-              <i className="text-xs">{article.publishAt}</i>
+              <i className="text-xs">
+                {!article.category ? (
+                  ""
+                ) : (
+                  <>
+                    <Link
+                      to={`/categories/${article.category}`}
+                      className="text-blue-500 hover:text-blue-700"
+                    >
+                      {article.category}
+                    </Link>
+                    &nbsp; /&nbsp;
+                  </>
+                )}
+                {dayjs().to(dayjs(article.publishedAt))}
+              </i>
 
               <Link
                 to={`/categories/${article.category}`}
@@ -37,7 +56,9 @@ const Article = () => {
             </div>
 
             <h1 className="font-bold text-2xl">{article.title}</h1>
-            <p className="text-neutral-500 text-justify">{article.summary}</p>
+            <p className="text-neutral-500 text-justify">
+              {article.description}
+            </p>
 
             <Link
               to={article.url || "https://google.com"}
@@ -51,7 +72,7 @@ const Article = () => {
             <hr />
 
             <div className="text-sm mt-4">
-              <span className="font-semibold">Summary</span>
+              <span className="font-semibold">description</span>
               <span className="text-orange-400">
                 {" "}
                 By {article.author || "unknown"}
@@ -86,8 +107,8 @@ Article.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     banner: PropTypes.string,
-    publishAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    summary: PropTypes.string,
+    publishedAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    description: PropTypes.string,
     content: PropTypes.string,
     author: PropTypes.string,
     category: PropTypes.string,

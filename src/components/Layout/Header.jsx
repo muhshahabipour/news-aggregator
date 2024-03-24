@@ -3,16 +3,36 @@ import { cn } from "@/utils/cn";
 
 const categories = [
   {
-    title: "Politic",
-    key: "Politic",
+    title: "Business",
+    key: "business",
+  },
+
+  {
+    title: "Entertainment",
+    key: "entertainment",
+  },
+  {
+    title: "General",
+    key: "general",
+  },
+
+  {
+    title: "Health",
+    key: "health",
+  },
+
+  {
+    title: "Science",
+    key: "science",
   },
   {
     title: "Sports",
-    key: "Sports",
+    key: "sports",
   },
+
   {
-    title: "Art",
-    key: "Art",
+    title: "Technology",
+    key: "technology",
   },
 ];
 
