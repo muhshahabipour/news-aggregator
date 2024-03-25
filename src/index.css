@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+    @apply w-full h-full overflow-hidden overflow-y-auto m-0 p-0
+}
