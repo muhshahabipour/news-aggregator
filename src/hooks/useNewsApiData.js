@@ -25,7 +25,7 @@ const useNewsData = (
           ? `&q=${encodeURIComponent(searchTerm)}`
           : "";
         const fromParam = params.from ? `&from=${params.from}` : "";
-        const toParam = searchTerm ? `&to=${params.to}` : "";
+        const toParam = page.to ? `&to=${params.to}` : "";
         const pageSizeParam = pageSize ? `&pageSize=${pageSize}` : "";
         const pageParam = page ? `&page=${page}` : "";
         const sortByParam = params.sortBy ? `&sortBy=${params.sortBy}` : ""; // relevancy, popularity, publishedAt
