@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import Loading from "@/pages/Loading/Loading";
 import NewsByCategory from "@/pages/NewsByCategory/NewsByCategory";
 import Root from "@/pages/Root";
+import Search from "@/pages/Search/Search";
 import { Suspense } from "react";
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
         {
           path: "article/:id",
           element: <Article />,
+        },
+        {
+          path: "search",
+          element: <Search />,
         },
       ],
     },
