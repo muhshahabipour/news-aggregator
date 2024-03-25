@@ -12,17 +12,17 @@ class RequestBuilder {
   }
 
   forBaseUrl() {
-    switch (process.env.NODE_ENVIRONMENT) {
+    switch (import.meta.env.NODE_ENVIRONMENT) {
       case "local":
         this.self.baseUrl = "";
         return this;
       case "development":
         // @ts-ignore
-        this.self.baseUrl = `${process.env.REACT_APP_BASE_URL}`;
+        this.self.baseUrl = `${import.meta.env.VITE_BASE_URL}`;
         return this;
       case "production":
         // @ts-ignore
-        this.self.baseUrl = `${process.env.REACT_APP_BASE_URL}`;
+        this.self.baseUrl = `${import.meta.env.VITE_BASE_URL}`;
         return this;
       default:
         return this;
@@ -30,17 +30,17 @@ class RequestBuilder {
   }
 
   forNewYorkTimesBaseUrl() {
-    this.self.baseUrl = process.env.REACT_APP_NEW_YORK_TIMES_BASE_URL || "";
+    this.self.baseUrl = import.meta.env.VITE_NEW_YORK_TIMES_BASE_URL || "";
     return this;
   }
 
   forNewsApiBaseUrl() {
-    this.self.baseUrl = process.env.REACT_APP_NEWS_API_BASE_URL || "";
+    this.self.baseUrl = import.meta.env.VITE_NEWS_API_BASE_URL || "";
     return this;
   }
 
   forGuardianBaseUrl() {
-    this.self.baseUrl = process.env.REACT_APP_GUARDIAN_BASE_URL || "";
+    this.self.baseUrl = import.meta.env.VITE_GUARDIAN_BASE_URL || "";
     return this;
   }
 

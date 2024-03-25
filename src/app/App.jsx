@@ -24,7 +24,7 @@ function App() {
           element: <NewsByCategory />,
         },
         {
-          path: "article/:source/:id",
+          path: "article/:id",
           element: <Article />,
         },
       ],
