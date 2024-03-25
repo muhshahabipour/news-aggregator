@@ -13,7 +13,7 @@ const Trending = () => {
 
   return (
     <div>
-      <h1 className="font-bold">Trending</h1>
+      <h1 className="font-bold text-2xl font-mono">Trending</h1>
       <div className="flex flex-col gap-y-4 xl:flex-row mt-6">
         <div className="flex flex-col xl:basis-1/2 xl:pr-2">
           {loading ? <Skeleton /> : <TrendingFirst article={newsData[0]} />}

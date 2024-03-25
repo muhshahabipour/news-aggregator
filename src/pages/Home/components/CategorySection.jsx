@@ -19,7 +19,7 @@ const CategorySection = ({ category }) => {
 
   return (
     <div className="w-full">
-      <h5 className="font-semibold mb-6">{category.title}</h5>
+      <h5 className="font-semibold text-2xl font-mono mb-6">{category.title}</h5>
       <div className="flex flex-col gap-4">
         {[...(articles || [])].slice(0, 2).map((article) => (
           <ArticleBrief key={article.id} article={article} />

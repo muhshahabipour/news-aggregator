@@ -5,15 +5,27 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const TrendingFirst = ({ article }) => {
+const TrendingFirst = ({
+  article = {
+    title: "quis adipisicing dolore enim esse sunt",
+    banner: "http://placehold.it/32x32",
+    publishedAt: "2020-01-11T11:18:50 -02:00",
+    description:
+      "Ad exercitation elit id est cillum nostrud ea enim aute magna cupidatat pariatur ad. Quis exercitation ad aliqua pariatur elit ex reprehenderit. Irure ullamco amet aliquip velit do. Consectetur eu ut in consectetur in anim consectetur irure cillum reprehenderit in. Ea ipsum tempor cillum minim ut nulla tempor excepteur mollit laboris quis amet. Nisi ad quis fugiat fugiat fugiat.\r\n",
+    content:
+      "Ad exercitation elit id est cillum nostrud ea enim aute magna cupidatat pariatur ad. Quis exercitation ad aliqua pariatur elit ex reprehenderit. Irure ullamco amet aliquip velit do. Consectetur eu ut in consectetur in anim consectetur irure cillum reprehenderit in. Ea ipsum tempor cillum minim ut nulla tempor excepteur mollit laboris quis amet. Nisi ad quis fugiat fugiat fugiat.\r\n",
+    author: "Darla Stark",
+    url: "https://google.com",
+  },
+}) => {
   return (
     <Link
       to={`/article/${encodeURIComponent(article.title)}`}
-      state={{article}}
+      state={{ article }}
       className="flex items-stretch w-full"
     >
       <div className="w-full space-y-3">
-        <div className="rounded-lg overflow-hidden h-64 w-full bg-neutral-100 flex justify-center items-center">
+        <div className="rounded-lg overflow-hidden xl:h-64 w-full bg-neutral-100 flex justify-center items-center">
           <img
             src={article.banner}
             alt=""
@@ -47,7 +59,6 @@ const TrendingFirst = ({ article }) => {
 
 TrendingFirst.propTypes = {
   article: PropTypes.shape({
-    id: PropTypes.string,
     title: PropTypes.string,
     banner: PropTypes.string,
     publishedAt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
