@@ -9,7 +9,16 @@ const SearchResult = ({
   page = 1,
   setPage,
 }) => {
-  if (loading) return <span>Loading ...</span>;
+  if (loading)
+    return (
+      <div className="">
+        <div className="flex flex-col gap-4">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
+            <ArticleBrief loading={true} key={"result " + index} />
+          ))}
+        </div>
+      </div>
+    );
 
   return (
     <div className="">

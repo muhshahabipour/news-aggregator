@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Skeleton from "react-loading-skeleton";
 import capitalize from "lodash/capitalize";
 import { cn } from "@/utils/cn";
 import dayjs from "dayjs";
@@ -7,7 +8,31 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const ArticleBrief = ({ article, imageClassNames, showDescription = true }) => {
+const ArticleBrief = ({
+  article,
+  imageClassNames,
+  showDescription = true,
+  loading = false,
+}) => {
+  if (loading)
+    return (
+      <div className="flex items-stretch flex-col md:flex-row w-full gap-2">
+        <div
+          className={cn(
+            "rounded-lg flex-shrink-0 overflow-hidden bg-neutral-100 flex justify-center items-center h-[inherit] md:h-32 w-full md:w-32",
+            imageClassNames
+          )}
+        >
+          <Skeleton width={128} height={128} />
+        </div>
+        <div className="flex flex-col gap-1 pt-1 w-full">
+          <Skeleton width={180} />
+          <Skeleton count={1} />
+          {showDescription && <Skeleton count={2} />}
+        </div>
+      </div>
+    );
+
   return (
     <Link
       to={`/article/${encodeURIComponent(article.title)}`}
@@ -69,6 +94,7 @@ const ArticleBrief = ({ article, imageClassNames, showDescription = true }) => {
 ArticleBrief.propTypes = {
   imageClassNames: PropTypes.string,
   showDescription: PropTypes.bool,
+  loading: PropTypes.bool,
   article: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,

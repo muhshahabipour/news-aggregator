@@ -1,6 +1,5 @@
 import ArticleBrief from "../../../components/Feeds/ArticleBrief";
 import PropTypes from "prop-types";
-import Skeleton from "react-loading-skeleton";
 import useNewsData from "@/hooks/useNewsApiData";
 
 const CategorySection = ({ category }) => {
@@ -22,19 +21,7 @@ const CategorySection = ({ category }) => {
           </h5>
           <div className="flex flex-col gap-4">
             {[1, 2].map((index) => (
-              <div
-                key={category.title + " " + index}
-                className="flex items-stretch flex-col md:flex-row w-full gap-2"
-              >
-                <div className="rounded-lg flex-shrink-0 overflow-hidden h-[inherit] md:h-32 w-full md:w-32 bg-neutral-100 flex justify-center items-center">
-                  <Skeleton width={128} height={128} />
-                </div>
-                <div className="flex flex-col gap-1 pt-1 w-full">
-                  <Skeleton width={180} />
-                  <Skeleton count={1} />
-                  <Skeleton count={2} />
-                </div>
-              </div>
+              <ArticleBrief loading={true} key={category.title + " " + index} />
             ))}
           </div>
         </div>

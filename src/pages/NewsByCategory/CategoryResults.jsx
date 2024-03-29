@@ -1,5 +1,6 @@
 import ArticleBrief from "@/components/Feeds/ArticleBrief";
 import CustomPagination from "@/components/Pagination/CustomPagination";
+import { Fragment } from "react";
 import PropTypes from "prop-types";
 
 const CategoryResults = ({
@@ -9,7 +10,14 @@ const CategoryResults = ({
   page = 1,
   setPage,
 }) => {
-  if (loading) return <span>Loading ...</span>;
+  if (loading)
+    return (
+      <Fragment>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
+          <ArticleBrief loading={true} key={"category " + index} />
+        ))}
+      </Fragment>
+    );
 
   return (
     <>

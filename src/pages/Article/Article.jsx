@@ -15,7 +15,7 @@ const Article = () => {
     <div className="flex-grow flex flex-col gap-8 px-6">
       <div className="flex items-stretch w-full">
         <div className="w-full space-y-3">
-          <div className="rounded-lg overflow-hidden w-full bg-neutral-100 flex justify-center items-center">
+          <div className="rounded-lg overflow-hidden w-full bg-neutral-100 flex h-80 justify-center items-center">
             <img
               src={article.banner}
               alt=""
