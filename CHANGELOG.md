@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/muhshahabipour/news-aggregator/compare/v0.0.3...v0.0.4) (2024-03-29)
+
+
+### Bug Fixes
+
+* **loading:** fix some loading ([4f2b9a9](https://github.com/muhshahabipour/news-aggregator/commit/4f2b9a9a536de1f20fc9e24b25894a68debe0f1c))
+* **search:** fix search results and ui ([82f2d88](https://github.com/muhshahabipour/news-aggregator/commit/82f2d880f5a36f326d6055c1dd70a8cc39e4c8b8))
+
 ### [0.0.3](https://github.com/muhshahabipour/news-aggregator/compare/v0.0.2...v0.0.3) (2024-03-29)
 
 
