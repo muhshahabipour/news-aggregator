@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import CategoryResults from "./CategoryResults";
+import CategoryResults from "./components/CategoryResults";
 import { capitalize } from "lodash";
 import { groupParamsByKey } from "@/utils/helpers";
 import qs from "qs";

@@ -70,7 +70,9 @@ const ArticleBrief = ({
             )}
             {article.author || "unknown"}
             &nbsp; /&nbsp;&nbsp;
-            {dayjs().to(dayjs(article.publishedAt))}
+            {dayjs().diff(article.publishedAt, "day") > 1
+              ? dayjs(article.publishedAt).format("YYYY-MM-DD")
+              : dayjs().to(dayjs(article.publishedAt))}
             &nbsp; /&nbsp;&nbsp;
             <Link
               to={`/sources/${article.source}`}

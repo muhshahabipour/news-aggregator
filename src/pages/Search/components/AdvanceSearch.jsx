@@ -22,12 +22,52 @@ const AdvanceSearch = () => {
   const inpRef = useRef(null);
 
   useEffect(() => {
+    function handleClear(e) {
+      const target = e.target;
+
+      if (
+        target.tagName.toLowerCase() === "button" &&
+        target.innerHTML === "Clear" &&
+        fromIsOpen
+      ) {
+        setFrom(null);
+      }
+    }
+
+    window.addEventListener("click", handleClear);
+
+    return () => {
+      window.removeEventListener("click", handleClear);
+    };
+  }, [fromIsOpen]);
+
+  useEffect(() => {
+    function handleClear(e) {
+      const target = e.target;
+
+      if (
+        target.tagName.toLowerCase() === "button" &&
+        target.innerHTML === "Clear" &&
+        toIsOpen
+      ) {
+        setTo(null);
+      }
+    }
+
+    window.addEventListener("click", handleClear);
+
+    return () => {
+      window.removeEventListener("click", handleClear);
+    };
+  }, [toIsOpen]);
+
+  useEffect(() => {
     const query = new URLSearchParams(search);
     setTerm(query.get("q"));
     setSortBy(query.get("sortBy"));
     setCategory(query.get("category"));
-    setFrom(query.get("from"));
-    setTo(query.get("to"));
+    setFrom(query.has("from") ? new Date(query.get("from")) : null);
+    setTo(query.has("to") ? new Date(query.get("to")) : null);
     inpRef.current.focus();
   }, [search]);
 
@@ -86,7 +126,7 @@ const AdvanceSearch = () => {
                   {[
                     {
                       title: "All",
-                      key: "",
+                      key: '',
                     },
                     {
                       title: "Business",
@@ -134,6 +174,7 @@ const AdvanceSearch = () => {
                     show={fromIsOpen}
                     setShow={setFromIsOpen}
                     onChange={setFrom}
+                    value={from}
                     options={{
                       title: "",
                       autoHide: true,
@@ -143,21 +184,18 @@ const AdvanceSearch = () => {
                       maxDate: new Date(to || "2030-01-01"),
                       minDate: new Date("1950-01-01"),
                       theme: {
-                        background:
-                          "bg-white dark:bg-white dark:text-[color:inherit]",
-                        todayBtn:
-                          "bg-orange-600 text-white dark:bg-orange-600 dark:text-white",
+                        background: "bg-white",
+                        todayBtn: "bg-orange-600 text-white",
                         clearBtn:
-                          "dark:bg-orange-600 bg-orange-600 dark:hover:bg-orange-600 hover:bg-orange-600 dark:border-orange-600 border-orange-600",
+                          "text-white bg-orange-600 hover:bg-orange-600 border-orange-600",
                         icons:
-                          "dark:bg-transparent hover:text-white dark:hover:text-white bg-transparent dark:hover:bg-orange-600 hover:bg-orange-600 text-neutral-800 dark:text-neutral-800",
-                        text: "dark:text-[color:inherit] hover:bg-orange-600 dark:hover:bg-orange-600 hover:text-white dark:hover:text-white",
-                        disabledText:
-                          "bg-transparent text-neutral-300 dark:text-neutral-300",
+                          "hover:text-white bg-transparent hover:bg-orange-600 text-neutral-800",
+                        text: "hover:bg-orange-600 hover:text-white",
+                        disabledText: "bg-transparent text-neutral-300",
                         input:
-                          "py-2 rounded-md bg-white dark:bg-white border-slate-300 dark:border-slate-300 rounded-md text-sm leading-3 placeholder-slate-400 dark:text-[color:inherit]",
-                        inputIcon: "dark:text-neutral-400",
-                        selected: "dark:text-white text-white",
+                          "py-2 rounded-md bg-white border-slate-300 rounded-md text-sm leading-3 placeholder-slate-400",
+                        inputIcon: "",
+                        selected: "text-white",
                       },
                       icons: {
                         prev: () => (
@@ -190,8 +228,7 @@ const AdvanceSearch = () => {
                         ),
                       },
                       datepickerClassNames: "top-10",
-                      defaultDate: new Date(),
-                      value: from,
+                      defaultDate: null,
                       language: "en",
                       disabledDates: [],
                       weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
@@ -214,7 +251,11 @@ const AdvanceSearch = () => {
                     classNames="relative mt-1"
                     show={toIsOpen}
                     setShow={setToIsOpen}
-                    onChange={setTo}
+                    onChange={(v) => {
+                      console.log(v);
+                      setTo(v);
+                    }}
+                    value={to}
                     options={{
                       title: "",
                       autoHide: true,
@@ -224,21 +265,18 @@ const AdvanceSearch = () => {
                       maxDate: new Date("2030-01-01"),
                       minDate: new Date(from || "1950-01-01"),
                       theme: {
-                        background:
-                          "bg-white dark:bg-white dark:text-[color:inherit]",
-                        todayBtn:
-                          "bg-orange-600 text-white dark:bg-orange-600 dark:text-white",
+                        background: "bg-white",
+                        todayBtn: "bg-orange-600 text-white",
                         clearBtn:
-                          "dark:bg-orange-600 bg-orange-600 dark:hover:bg-orange-600 hover:bg-orange-600 dark:border-orange-600 border-orange-600",
+                          "text-white bg-orange-600 hover:bg-orange-600 border-orange-600",
                         icons:
-                          "dark:bg-transparent hover:text-white dark:hover:text-white bg-transparent dark:hover:bg-orange-600 hover:bg-orange-600 text-neutral-800 dark:text-neutral-800",
-                        text: "dark:text-[color:inherit] hover:bg-orange-600 dark:hover:bg-orange-600 hover:text-white dark:hover:text-white",
-                        disabledText:
-                          "bg-transparent text-neutral-300 dark:text-neutral-300",
+                          "hover:text-white bg-transparent hover:bg-orange-600 text-neutral-800",
+                        text: "hover:bg-orange-600 hover:text-white",
+                        disabledText: "bg-transparent text-neutral-300",
                         input:
-                          "py-2 rounded-md bg-white dark:bg-white border-slate-300 dark:border-slate-300 rounded-md text-sm leading-3 placeholder-slate-400 dark:text-[color:inherit]",
-                        inputIcon: "dark:text-neutral-400",
-                        selected: "dark:text-white text-white",
+                          "py-2 rounded-md bg-white border-slate-300 rounded-md text-sm leading-3 placeholder-slate-400",
+                        inputIcon: "",
+                        selected: "text-white",
                       },
                       icons: {
                         prev: () => (
@@ -271,8 +309,7 @@ const AdvanceSearch = () => {
                         ),
                       },
                       datepickerClassNames: "top-10",
-                      defaultDate: new Date(),
-                      value: to,
+                      defaultDate: null,
                       language: "en",
                       disabledDates: [],
                       weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],

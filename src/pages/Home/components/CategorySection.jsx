@@ -35,8 +35,14 @@ const CategorySection = ({ category }) => {
           <h5 className="font-semibold text-2xl font-mono mb-6">
             {category.title}
           </h5>
-          <div className="flex flex-col gap-4">
-            <div>No Data</div>
+          <div className="flex flex-col gap-4 relative p-4">
+            {[1, 2].map((index) => (
+              <ArticleBrief loading={true} key={category.title + " " + index} />
+            ))}
+
+            <div className="absolute left-0 right-0 top-0 bottom-0 bg-neutral-500 bg-opacity-15 rounded-lg flex justify-center items-center">
+              No Data
+            </div>
           </div>
         </div>
       </>

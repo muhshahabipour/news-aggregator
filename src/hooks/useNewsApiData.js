@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { sortBy } from "lodash";
+
 const useNewsData = (
   searchTerm,
   params = { category: null, from: null, to: null, sortBy: null },
@@ -47,7 +49,7 @@ const useNewsData = (
       const data = await response.json();
 
       return {
-        articles: data.articles.map((article) => ({
+        articles: (data.articles || []).map((article) => ({
           ...article,
           banner: article.urlToImage,
           category: { title: article.category, value: article.category },
@@ -133,8 +135,8 @@ const useNewsData = (
       const searchParam = searchTerm
         ? `&q=${encodeURIComponent(searchTerm)}`
         : "";
-      const fromParam = params.from ? `&begin_date=${params.from}` : "";
-      const toParam = params.to ? `&end_date=${params.to}` : "";
+      const fromParam = params.from ? `&from-date=${params.from}` : "";
+      const toParam = params.to ? `&to-date=${params.to}` : "";
       // const pageSizeParam = pageSize ? `&pageSize=${pageSize}` : "";
       const pageParam = page ? `&page=${page}` : "";
       const sortByParam = params.sortBy
@@ -191,7 +193,7 @@ const useNewsData = (
           totalElements += Number(result.totalResults || 0);
 
           if (index === results.length - 1) {
-            setNewsData(articles);
+            setNewsData(sortBy(articles, ["publishedAt"]));
             setTotalResults(totalElements);
           }
         });
