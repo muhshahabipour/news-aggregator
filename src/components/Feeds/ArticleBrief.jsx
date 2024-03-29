@@ -7,7 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const ArticleBrief = ({ article, imageClassNames }) => {
+const ArticleBrief = ({ article, imageClassNames, showDescription = true }) => {
   return (
     <Link
       to={`/article/${encodeURIComponent(article.title)}`}
@@ -56,9 +56,11 @@ const ArticleBrief = ({ article, imageClassNames }) => {
           </i>
         </div>
         <h4 className="font-bold line-clamp-2">{article.title}</h4>
-        <p className="line-clamp-4 text-neutral-500 text-justify">
-          {article.description}
-        </p>
+        {showDescription && (
+          <p className="line-clamp-4 text-neutral-500 text-justify">
+            {article.description}
+          </p>
+        )}
       </div>
     </Link>
   );
@@ -66,6 +68,7 @@ const ArticleBrief = ({ article, imageClassNames }) => {
 
 ArticleBrief.propTypes = {
   imageClassNames: PropTypes.string,
+  showDescription: PropTypes.bool,
   article: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,

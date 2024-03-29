@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Skeleton from "react-loading-skeleton";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
 const TrendingFirst = ({
+  loading,
   article = {
     title: "quis adipisicing dolore enim esse sunt",
     banner: "http://placehold.it/32x32",
@@ -18,6 +20,22 @@ const TrendingFirst = ({
     url: "https://google.com",
   },
 }) => {
+  if (loading)
+    return (
+      <div className="flex items-stretch w-full">
+        <div className="w-full space-y-3">
+          <div className="rounded-lg overflow-hidden xl:h-64 w-full bg-neutral-100 flex justify-center items-center">
+            <Skeleton style={{ width: "100%", height: "100%" }} />
+          </div>
+          <div className="flex flex-col gap-1 ">
+            <Skeleton width={280} />
+            <Skeleton count={2} />
+            <Skeleton count={4} />
+          </div>
+        </div>
+      </div>
+    );
+
   return (
     <Link
       to={`/article/${encodeURIComponent(article.title)}`}
@@ -60,6 +78,7 @@ const TrendingFirst = ({
 };
 
 TrendingFirst.propTypes = {
+  loading: PropTypes.bool,
   article: PropTypes.shape({
     title: PropTypes.string,
     banner: PropTypes.string,
