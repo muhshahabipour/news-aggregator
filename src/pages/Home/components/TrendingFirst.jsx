@@ -27,8 +27,8 @@ const TrendingFirst = ({
       <div className="w-full space-y-3">
         <div className="rounded-lg overflow-hidden xl:h-64 w-full bg-neutral-100 flex justify-center items-center">
           <img
-            src={article.banner}
-            alt=""
+            src={article.banner || "https://fakeimg.pl/600x400?text=No+Photo"}
+            alt={article.title}
             className="min-w-0 min-h-0 flex-shrink-0 h-[inherit] w-full object-cover"
           />
         </div>

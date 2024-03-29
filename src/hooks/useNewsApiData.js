@@ -4,7 +4,8 @@ const useNewsData = (
   searchTerm,
   params = { category: null, from: null, to: null, sortBy: null },
   page = 1,
-  pageSize = 10
+  pageSize = 10,
+  source
 ) => {
   // eslint-disable-next-line no-unused-vars
   const [newsData, setNewsData] = useState([]);
@@ -63,9 +64,9 @@ const useNewsData = (
       const apiUrl =
         import.meta.env.VITE_NEW_YORK_TIMES_BASE_URL +
         `/svc/search/v2/articlesearch.json?api-key=${apiKey}`;
-      // const categoryParam = params.category
-      //   ? `&category=${params.category}`
-      //   : "";
+      const categoryParam = params.category
+        ? `&fq=news_desk:("${params.category}")`
+        : "";
       const searchParam = searchTerm
         ? `&q=${encodeURIComponent(searchTerm)}`
         : "";
@@ -79,7 +80,7 @@ const useNewsData = (
 
       const url =
         apiUrl +
-        // categoryParam +
+        categoryParam +
         searchParam +
         fromParam +
         toParam +
@@ -89,31 +90,37 @@ const useNewsData = (
       const response = await fetch(url);
       const data = await response.json();
 
-      return {
-        articles: data.response.docs.map((article) => {
-          const banner = article.multimedia.find((x) => x.subType === "xlarge");
-          // eslint-disable-next-line no-debugger
-          debugger;
-          return {
-            id: article._id,
-            title: article.headline?.main,
-            banner: banner
-              ? "https://www.nytimes.com/" + banner?.url
-              : undefined,
-            publishedAt: article.pub_date,
-            description: article.abstract,
-            content: article.lead_paragraph,
-            author: article.byline?.original || undefined,
-            category: { title: article.news_desk, value: article.news_desk },
-            url: article.web_url,
-            keyWords: [...(article.keywords || [])].map(
-              (keyword) => keyword.value
-            ),
-            source: "NY_TIMES",
-          };
-        }),
-        totalResults: data.response.meta.hits,
-      };
+      if (data.response)
+        return {
+          articles: data.response.docs.map((article) => {
+            const banner = article.multimedia.find(
+              (x) => x.subType === "xlarge"
+            );
+            return {
+              id: article._id,
+              title: article.headline?.main,
+              banner: banner
+                ? "https://www.nytimes.com/" + banner?.url
+                : undefined,
+              publishedAt: article.pub_date,
+              description: article.abstract,
+              content: article.lead_paragraph,
+              author: article.byline?.original || undefined,
+              category: { title: article.news_desk, value: article.news_desk },
+              url: article.web_url,
+              keyWords: [...(article.keywords || [])].map(
+                (keyword) => keyword.value
+              ),
+              source: "NY_TIMES",
+            };
+          }),
+          totalResults: data.response.meta.hits,
+        };
+      else
+        return {
+          articles: [],
+          totalResults: 0,
+        };
     }
     async function fetchGuardianData() {
       const apiKey = import.meta.env.VITE_GUARDIAN_KEY;
@@ -165,16 +172,25 @@ const useNewsData = (
       };
     }
 
-    Promise.all([fetchNewsAPIData(), fetchNYTimesData(), fetchGuardianData()])
+    const fns = [];
+
+    if (!source || source === "NEWS_API")
+      fns.push(setTimeout(() => fetchNewsAPIData(), 15000));
+    if (!source || source === "NY_TIMES") fns.push(fetchNYTimesData());
+    if (!source || source === "GUARDIAN") fns.push(fetchGuardianData());
+
+    Promise.all(fns)
       .then((results) => {
         let articles = [];
         let totalElements = 0;
 
         results.forEach((result, index) => {
-          articles = [...articles, ...result.articles];
-          totalElements += Number(result.totalResults);
+          // eslint-disable-next-line no-debugger
+          // debugger
+          articles = [...articles, ...(result.articles || [])];
+          totalElements += Number(result.totalResults || 0);
 
-          if (index === 2) {
+          if (index === results.length - 1) {
             setNewsData(articles);
             setTotalResults(totalElements);
           }
@@ -182,6 +198,7 @@ const useNewsData = (
       })
 
       .catch((reason) => {
+        console.error(reason);
         setError(reason);
       })
       .finally(() => {
@@ -195,6 +212,7 @@ const useNewsData = (
     searchTerm,
     page,
     pageSize,
+    source,
   ]);
 
   return { newsData, totalResults, loading, error };

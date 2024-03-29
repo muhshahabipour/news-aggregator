@@ -14,8 +14,8 @@ const TrendingItem = ({ article }) => {
     >
       <div className="rounded-lg flex-shrink-0 overflow-hidden h-16 w-16 bg-neutral-100 flex justify-center items-center">
         <img
-          src={article.banner}
-          alt=""
+          src={article.banner || "https://fakeimg.pl/600x400?text=No+Photo"}
+          alt={article.title}
           className="min-w-0 min-h-0 flex-shrink-0 h-[inherit] w-full object-cover"
         />
       </div>

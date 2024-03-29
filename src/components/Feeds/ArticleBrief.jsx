@@ -1,22 +1,28 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
+import { cn } from "@/utils/cn";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const ArticleBrief = ({ article }) => {
+const ArticleBrief = ({ article, imageClassNames }) => {
   return (
     <Link
       to={`/article/${encodeURIComponent(article.title)}`}
       state={{ article }}
       className="flex items-stretch flex-col md:flex-row w-full gap-2"
     >
-      <div className="rounded-lg flex-shrink-0 overflow-hidden h-[inherit] md:h-32 w-full md:w-32 bg-neutral-100 flex justify-center items-center">
+      <div
+        className={cn(
+          "rounded-lg flex-shrink-0 overflow-hidden bg-neutral-100 flex justify-center items-center h-[inherit] md:h-32 w-full md:w-32",
+          imageClassNames
+        )}
+      >
         <img
-          src={article.banner}
-          alt=""
+          src={article.banner || "https://fakeimg.pl/600x400?text=No+Photo"}
+          alt={article.title}
           className="min-w-0 min-h-0 flex-shrink-0 h-[inherit] w-full object-cover"
         />
       </div>
@@ -59,6 +65,7 @@ const ArticleBrief = ({ article }) => {
 };
 
 ArticleBrief.propTypes = {
+  imageClassNames: PropTypes.string,
   article: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,

@@ -34,14 +34,14 @@ const AdvanceSearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(
-      "/search" +
+      "/search?" +
         qs.stringify(
           {
-            q: inpRef.current.value,
-            category,
+            q: inpRef.current.value || null,
+            category: category || null,
             from: from ? dayjs(from).format("YYYY-MM-DD") : null,
             to: to ? dayjs(to).format("YYYY-MM-DD") : null,
-            sortBy,
+            sortBy: sortBy || null,
           },
           { skipNulls: true }
         )

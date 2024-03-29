@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import AdvanceSearch from "./components/AdvanceSearch";
 import SearchResult from "./components/SearchResult";
+import { groupParamsByKey } from "@/utils/helpers";
+import qs from "qs";
 import useNewsData from "@/hooks/useNewsApiData";
 
 const Search = () => {
@@ -26,9 +28,10 @@ const Search = () => {
   );
 
   const handleChangePage = (pageNumber) => {
+    const params = groupParamsByKey(query);
     navigate(
-      "/search" +
-        (!search ? "?page=" + pageNumber : search + "&page=" + pageNumber)
+      "/search?" +
+        qs.stringify({ ...params, page: pageNumber }, { skipNulls: true })
     );
   };
 
@@ -42,7 +45,7 @@ const Search = () => {
         <SearchResult
           loading={loading}
           articles={articles}
-          totalPages={totalResults / 20}
+          totalPages={totalResults / 10}
           {...{ page: query.get("page") || 1, setPage: handleChangePage }}
         />
       </div>

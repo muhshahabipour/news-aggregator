@@ -1,3 +1,5 @@
+import "react-loading-skeleton/dist/skeleton.css";
+
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Article from "@/pages/Article/Article";
@@ -22,6 +24,10 @@ function App() {
         },
         {
           path: "categories/:category",
+          element: <NewsByCategory />,
+        },
+        {
+          path: "sources/:source",
           element: <NewsByCategory />,
         },
         {

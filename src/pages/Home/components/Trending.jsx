@@ -1,15 +1,11 @@
 import Skeleton from "react-loading-skeleton";
 import TrendingFirst from "./TrendingFirst";
 import TrendingItem from "./TrendingItem";
-import { useEffect } from "react";
 import useNewsData from "@/hooks/useNewsApiData";
 
 const Trending = () => {
   const { loading, newsData = [] } = useNewsData(null, undefined, 1, 6);
 
-  useEffect(() => {
-    if (!loading) console.log(loading);
-  }, [newsData, loading]);
 
   return (
     <div>
