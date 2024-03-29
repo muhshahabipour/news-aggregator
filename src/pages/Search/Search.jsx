@@ -22,11 +22,14 @@ const Search = () => {
       sortBy: query.get("sortBy"),
     },
     query.get("page") || 1,
-    20
+    10
   );
 
   const handleChangePage = (pageNumber) => {
-    navigate("/search" + search + "&page=" + pageNumber);
+    navigate(
+      "/search" +
+        (!search ? "?page=" + pageNumber : search + "&page=" + pageNumber)
+    );
   };
 
   return (

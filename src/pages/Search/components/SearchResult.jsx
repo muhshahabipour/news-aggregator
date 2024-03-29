@@ -41,7 +41,11 @@ SearchResult.propTypes = {
       description: PropTypes.string,
       content: PropTypes.string,
       author: PropTypes.string,
-      category: PropTypes.string,
+      // category: PropTypes.string,
+      category: PropTypes.shape({
+        title: PropTypes.string,
+        value: PropTypes.string,
+      }),
       source: PropTypes.string,
       url: PropTypes.string,
       keyWords: PropTypes.arrayOf(PropTypes.string),

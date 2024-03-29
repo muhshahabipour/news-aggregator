@@ -32,15 +32,12 @@ const AdvanceSearch = () => {
   }, [search]);
 
   const handleSubmit = (e) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     e.preventDefault();
     navigate(
-      "/search?q=" +
-        inpRef.current.value +
-        "&" +
+      "/search" +
         qs.stringify(
           {
+            q: inpRef.current.value,
             category,
             from: from ? dayjs(from).format("YYYY-MM-DD") : null,
             to: to ? dayjs(to).format("YYYY-MM-DD") : null,
@@ -52,7 +49,10 @@ const AdvanceSearch = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full border p-5 rounded-md"
+    >
       <div className="w-full xl:max-w-screen-sm mx-auto space-y-3">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col">
@@ -276,8 +276,8 @@ const AdvanceSearch = () => {
                       language: "en",
                       disabledDates: [],
                       weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-                      inputNameProp: "To",
-                      inputIdProp: "from",
+                      inputNameProp: "to",
+                      inputIdProp: "to",
                       inputPlaceholderProp: "Select Date",
                       inputDateFormatProp: {
                         day: "numeric",

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import capitalize from "lodash/capitalize";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -20,23 +21,34 @@ const ArticleBrief = ({ article }) => {
         />
       </div>
 
-      <div className="flex flex-col gap-1 pt-1">
-        <i className="text-xs">
-          {!article.category ? (
-            ""
-          ) : (
-            <>
-              <Link
-                to={`/categories/${article.category}`}
-                className="text-blue-500 hover:text-blue-700"
-              >
-                {article.category}
-              </Link>
-              &nbsp; /&nbsp;
-            </>
-          )}
-          {dayjs().to(dayjs(article.publishedAt))}
-        </i>
+      <div className="flex flex-col gap-1 pt-1 w-full">
+        <div className="flex items-center justify-between gap-1">
+          <i className="text-xs">
+            {!article.category || !article.category.title ? (
+              ""
+            ) : (
+              <>
+                <Link
+                  to={`/categories/${article.category.value}`}
+                  className="text-blue-500 hover:text-blue-700"
+                >
+                  {article.category.title}
+                </Link>
+                &nbsp; /&nbsp;&nbsp;
+              </>
+            )}
+            {article.author || "unknown"}
+            &nbsp; /&nbsp;&nbsp;
+            {dayjs().to(dayjs(article.publishedAt))}
+            &nbsp; /&nbsp;&nbsp;
+            <Link
+              to={`/sources/${article.source}`}
+              className="text-orange-500 hover:text-orange-700 normal-case"
+            >
+              {capitalize(article.source.replaceAll("_", " "))}
+            </Link>
+          </i>
+        </div>
         <h4 className="font-bold line-clamp-2">{article.title}</h4>
         <p className="line-clamp-4 text-neutral-500 text-justify">
           {article.description}
@@ -55,7 +67,11 @@ ArticleBrief.propTypes = {
     description: PropTypes.string,
     content: PropTypes.string,
     author: PropTypes.string,
-    category: PropTypes.string,
+    // category: PropTypes.string,
+    category: PropTypes.shape({
+      title: PropTypes.string,
+      value: PropTypes.string,
+    }),
     source: PropTypes.string,
     url: PropTypes.string,
     keyWords: PropTypes.arrayOf(PropTypes.string),

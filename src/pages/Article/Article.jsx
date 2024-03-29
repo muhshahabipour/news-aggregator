@@ -25,28 +25,23 @@ const Article = () => {
           <div className="flex flex-col gap-1 ">
             <div className="flex justify-between">
               <i className="text-xs">
-                {!article.category ? (
+                {!article.category || !article.category.title ? (
                   ""
                 ) : (
                   <>
                     <Link
-                      to={`/categories/${article.category}`}
+                      to={`/categories/${article.category.value}`}
                       className="text-blue-500 hover:text-blue-700"
                     >
-                      {article.category}
+                      {article.category.title}
                     </Link>
                     &nbsp; /&nbsp;
                   </>
                 )}
+                {article.author || "unknown"}
+                &nbsp; /&nbsp;
                 {dayjs().to(dayjs(article.publishedAt))}
               </i>
-
-              <Link
-                to={`/categories/${article.category}`}
-                className="text-blue-500 hover:text-blue-700"
-              >
-                {article.category}
-              </Link>
             </div>
 
             <h1 className="font-bold text-2xl">{article.title}</h1>
@@ -105,7 +100,11 @@ Article.propTypes = {
     description: PropTypes.string,
     content: PropTypes.string,
     author: PropTypes.string,
-    category: PropTypes.string,
+    // category: PropTypes.string,
+    category: PropTypes.shape({
+      title: PropTypes.string,
+      value: PropTypes.string,
+    }),
     source: PropTypes.string,
     url: PropTypes.string,
     keyWords: PropTypes.arrayOf(PropTypes.string),
