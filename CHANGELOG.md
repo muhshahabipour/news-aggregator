@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/muhshahabipour/news-aggregator/compare/v0.0.2...v0.0.3) (2024-03-29)
+
+
+### Features
+
+* **categories:** show all article in one category ([df9ee93](https://github.com/muhshahabipour/news-aggregator/commit/df9ee9397093535ca7f93fd6dd01426a6b0f9ef3))
+* **fetch data:** fetch all data ([c119c5f](https://github.com/muhshahabipour/news-aggregator/commit/c119c5f926d02ae44f491fb9d3a5fe3dff417616))
+* **home:** fetch popular data for home page ([5f7b690](https://github.com/muhshahabipour/news-aggregator/commit/5f7b690c980e0756af2597702c914a8c051193e3))
+* **search:** add search page and filters, add docker file for dockerize ([bce61a1](https://github.com/muhshahabipour/news-aggregator/commit/bce61a1706dc0c72a72c0e12ee592b2357824521))
+
+
+### Bug Fixes
+
+* **article list item:** fix category link ([3ef20c3](https://github.com/muhshahabipour/news-aggregator/commit/3ef20c3a1d034262337c9ba90be05bd9ee44c952))
+
 ### 0.0.2 (2024-03-24)
 
 
